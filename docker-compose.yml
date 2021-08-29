@@ -8,6 +8,6 @@ services:
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
-      - node_modules:/home/node/app/node_modules
+      - ./node_modules:/home/node/app/node_modules
 volumes:
   node_modules:
