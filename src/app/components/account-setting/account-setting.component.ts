@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AccountsService } from 'src/app/services/accounts.service';
 
 @Component({
@@ -9,15 +10,23 @@ import { AccountsService } from 'src/app/services/accounts.service';
 })
 export class AccountSettingComponent implements OnInit {
   exAccount = { email: '', password: '' };
-  private exAccounts: any ;
+  private exAccounts: any;
 
-  constructor(private accountService: AccountsService) {}
+  constructor(
+    private accountService: AccountsService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   submitted = false;
 
   ngOnInit(): void {
+    this.spinner.show();
+
     let exAccountId = 'r3ZeEHZrxpZBlvy0Y8vu'; // <- seed data
-    this.accountService.getAccountById(exAccountId).then(res => console.log('account:', res))
+    this.accountService
+      .getAccountById(exAccountId)
+      .then((res) => console.log('account:', res))
+      .finally(() => this.spinner.hide());
   }
 
   onSubmit() {
