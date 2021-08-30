@@ -10,24 +10,30 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppFooterComponent } from './shared/app-footer/app-footer.component';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { TopMenuComponent } from './shared/top-menu/top-menu.component';
-import { LeftMenuComponent } from './shared/left-menu/left-menu.component';
-import { DashboardFooterComponent } from './shared/dashboard-footer/dashboard-footer.component';
-import { AccountSettingComponent } from './components/account-setting/account-setting.component';
+import { PageContentComponent } from './layout/page-content/page-content.component';
+import { GuestLayoutComponent } from './layout/guest/guest-layout/guest-layout.component';
+import { GuestFooterComponent } from './layout/guest/guest-footer/guest-footer.component';
+import { AuthorizedLayoutComponent } from './layout/authorized/authorized-layout/authorized-layout.component';
+import { AuthorizedAsideComponent } from './layout/authorized/authorized-aside/authorized-aside.component';
+import { AuthorizedFooterComponent } from './layout/authorized/authorized-footer/authorized-footer.component';
+import { AuthorizedNavbarComponent } from './layout/authorized/authorized-navbar/authorized-navbar.component';
+import { LoginPageComponent } from './page/login-page/login-page.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
+import { ProfileComponent } from './page/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppFooterComponent,
-    LoginComponent,
+    PageContentComponent,
+    GuestLayoutComponent,
+    GuestFooterComponent,
+    AuthorizedLayoutComponent,
+    AuthorizedAsideComponent,
+    AuthorizedFooterComponent,
+    AuthorizedNavbarComponent,
+    LoginPageComponent,
     DashboardComponent,
-    TopMenuComponent,
-    LeftMenuComponent,
-    DashboardFooterComponent,
-    AccountSettingComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,23 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountSettingComponent } from './components/account-setting/account-setting.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
+
+import { GuestLayoutComponent } from './layout/guest/guest-layout/guest-layout.component';
+import { LoginPageComponent } from './page/login-page/login-page.component';
+
+import { AuthorizedLayoutComponent } from './layout/authorized/authorized-layout/authorized-layout.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
+import { ProfileComponent } from './page/profile/profile.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    children: [
-      { path: 'account-setting', component: AccountSettingComponent }
-    ]
+    path: 'auth',
+    component: GuestLayoutComponent,
+    children: [{ path: 'login', component: LoginPageComponent }],
   },
-  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' },
+  {
+    path: '',
+    component: AuthorizedLayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'profile', component: ProfileComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

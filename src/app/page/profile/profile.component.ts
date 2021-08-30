@@ -4,11 +4,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AccountsService } from 'src/app/services/accounts.service';
 
 @Component({
-  selector: 'app-account-setting',
-  templateUrl: './account-setting.component.html',
-  // styleUrls: ['./account-setting.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html'
 })
-export class AccountSettingComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   exAccount = { email: '', password: '' };
   private exAccounts: any;
 

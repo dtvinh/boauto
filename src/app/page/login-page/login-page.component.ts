@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginPageComponent implements OnInit {
+
   constructor(private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
@@ -15,4 +16,5 @@ export class LoginComponent implements OnInit {
       this.spinner.hide();
     }, 500);
   }
+
 }
