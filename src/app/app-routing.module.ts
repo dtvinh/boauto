@@ -7,6 +7,7 @@ import { LoginPageComponent } from './page/login-page/login-page.component';
 import { AuthorizedLayoutComponent } from './layout/authorized/authorized-layout/authorized-layout.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { ProfileComponent } from './page/profile/profile.component';
+import { ZoomComponent } from './page/zoom/zoom.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'zoom', component: ZoomComponent },
     ],
   },
 ];

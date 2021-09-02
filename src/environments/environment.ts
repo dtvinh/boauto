@@ -1,6 +1,9 @@
 
 export const environment = {
   production: false,
+  api_endpoint: {
+    exbase: 'https://exbase.net/api/'
+  },
   firebaseConfig: {
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,

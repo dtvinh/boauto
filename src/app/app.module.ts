@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { authInterceptorProviders } from 'src/_helpers/auth.interceptor';
@@ -24,6 +25,7 @@ import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { TradingAccountSettingComponent } from './component/trading-account-setting/trading-account-setting.component';
 import { TradingAccountInfoComponent } from './component/trading-account-info/trading-account-info.component';
+import { ZoomComponent } from './page/zoom/zoom.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +42,13 @@ import { TradingAccountInfoComponent } from './component/trading-account-info/tr
     ProfileComponent,
     TradingAccountSettingComponent,
     TradingAccountInfoComponent,
+    ZoomComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    MatIconModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

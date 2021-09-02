@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
-const TRADING_API = 'https://exbase.net/api/';
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
@@ -15,40 +12,19 @@ const httpOptions = {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'signin',
-      {
-        username,
-        password,
-      },
+  loginToExbase(email: string, password: string, captcha: string): Observable<any> {
+    return this.http.post('api/auth/auth/token',
+      { email, password, captcha, grant_type: 'password', client_id: 'exbase-web' },
       httpOptions
     );
   }
 
-  loginTrading(email: string, password: string, captcha: string, client_id: string, grant_type: string): Observable<any> {
+  refreshTokenTrading(refresh_token: string) {
     return this.http.post(
-      TRADING_API + 'auth/auth/token',
-      {
-        email,
-        password,
-        captcha,
-        client_id,
-        grant_type,
-      },
+      'api/auth/auth/token',
+      { refresh_token, grant_type: 'refresh_token', client_id: 'exbase-web' },
       httpOptions
     );
   }
 
-  // register(username: string, email: string, password: string): Observable<any> {
-  //   return this.http.post(
-  //     AUTH_API + 'signup',
-  //     {
-  //       username,
-  //       email,
-  //       password,
-  //     },
-  //     httpOptions
-  //   );
-  // }
 }
