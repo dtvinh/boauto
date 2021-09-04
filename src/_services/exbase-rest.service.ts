@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from './token-storage.service';
-import { environment } from '../environments/environment';
+import { TokenStorageService } from '.';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 

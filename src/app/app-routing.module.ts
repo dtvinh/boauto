@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { GuestLayoutComponent } from './layout/guest/guest-layout/guest-layout.component';
-import { LoginPageComponent } from './page/login-page/login-page.component';
+import { GuestLayoutComponent } from './layout/guest';
+import { AuthorizedLayoutComponent } from './layout/authorized';
 
-import { AuthorizedLayoutComponent } from './layout/authorized/authorized-layout/authorized-layout.component';
-import { DashboardComponent } from './page/dashboard/dashboard.component';
-import { ProfileComponent } from './page/profile/profile.component';
-import { ZoomComponent } from './page/zoom/zoom.component';
+import {
+  DashboardComponent,
+  ProfileComponent,
+  ZoomComponent,
+  LoginPageComponent
+} from './page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

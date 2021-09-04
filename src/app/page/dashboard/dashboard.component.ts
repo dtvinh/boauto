@@ -1,9 +1,9 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ExbaseRestService } from 'src/_services/exbase-rest.service';
-import { TokenStorageService } from 'src/_services/token-storage.service';
-import { environment } from '../../../environments/environment';
+import {
+  ExbaseRestService,
+  TokenStorageService
+} from 'src/_services';
 
 @Component({
   selector: 'app-dashboard',

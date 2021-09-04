@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FirestoreService } from 'src/app/services/firestore.service';
-import { AuthService } from 'src/_services/auth.service';
-import { TokenStorageService } from 'src/_services/token-storage.service';
+import {
+  AuthService,
+  FirestoreService,
+  TokenStorageService
+} from 'src/_services';
+
 
 const EXBASE_CLIENT_ID = 'exbase-web';
 const GRANT_TYPE = 'password';

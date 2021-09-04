@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ExbaseRestService } from 'src/_services/exbase-rest.service';
+import { ExbaseRestService } from 'src/_services';
 
 @Component({
   selector: 'app-zoom',

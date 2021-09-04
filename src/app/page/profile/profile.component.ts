@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FirestoreService } from 'src/app/services/firestore.service';
+import { FirestoreService } from 'src/_services';
 
 @Component({
   selector: 'app-profile',
