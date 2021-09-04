@@ -20889,7 +20889,7 @@ hr.horizontal.gray-light {
   bottom: 0;
   width: 100%;
   max-width: 15.625rem !important;
-  overflow-y: auto;
+  overflow-y: clip;
   padding: 0;
   box-shadow: none;
 }
