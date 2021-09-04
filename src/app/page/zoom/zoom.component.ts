@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { ExbaseRestService } from 'src/_services/exbase-rest.service';
 
 @Component({
@@ -20,8 +21,9 @@ export class ZoomComponent implements OnInit, AfterViewInit {
 
   constructor(
     private exbaseRestService: ExbaseRestService,
-    private spinner: NgxSpinnerService) {
-    }
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     setInterval(() => {
@@ -40,23 +42,26 @@ export class ZoomComponent implements OnInit, AfterViewInit {
     let betType = type;
     let betAmount = this.amount;
     let betAccountType = 'DEMO'
-    const notifyAction = 'Đóng';
-    let notifyMsg: string = '';
+
 
     this.exbaseRestService
       .post('/api/wallet/binaryoption/bet', { betType, betAmount, betAccountType })
       .subscribe(
-        (response) => {
-          notifyMsg = response.ok ? 'Đặt cược thành công!' : 'Đặt cược thất bại!';
-          this.isBet = true;
+        (res) => {
+          if (res.ok) {
+            this.toastr.success('Đặt cược thành công!');
+            this.isBet = true;
+          } else {
+            this.toastr.error(res.m);
+          }
         },
         (error) => {
-          notifyMsg = 'Đặt cược thất bại!';
-          console.log(error);
+          this.toastr.error('Có lỗi xảy ra! Vui lòng thử lại!');
+          this.spinner.hide();
         },
         () => {
           this.spinner.hide();
-          console.log('notifyMsg: ', notifyMsg);
+          this.resetAmount();
         }
       );
   }
@@ -65,7 +70,6 @@ export class ZoomComponent implements OnInit, AfterViewInit {
     this.exbaseRestService
       .get('/api/wallet/binaryoption/spot-balance', {})
       .subscribe(response => {
-        console.log('spotBalance', response);
       });
     this.isBet = false;
   }

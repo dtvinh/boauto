@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -47,6 +48,20 @@ import { ZoomComponent } from './page/zoom/zoom.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      maxOpened: 5,
+      iconClasses: {
+        error: 'text-danger',
+        info: 'toast-success',
+        success: 'toast-success',
+        warning: 'text-danger',
+      },
+      toastClass: 'toast fade p-2 bg-white show',
+      titleClass: 'toast-header border-0',
+      messageClass: 'toast-body'
+    }),
     NgxSpinnerModule,
     MatIconModule,
     AppRoutingModule,
