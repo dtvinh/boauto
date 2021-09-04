@@ -49,7 +49,7 @@ export class ZoomComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res) => {
           if (res.ok) {
-            this.toastr.success('Đặt cược thành công!');
+            this.toastr.success('Đặt lệnh thành công!');
             this.isBet = true;
           } else {
             this.toastr.error(res.m);
@@ -68,7 +68,7 @@ export class ZoomComponent implements OnInit, AfterViewInit {
 
   spotBalance() {
     this.exbaseRestService
-      .get('/api/wallet/binaryoption/spot-balance', {})
+      .get('/api/wallet/binaryoption/spot-balance')
       .subscribe(response => {
       });
     this.isBet = false;

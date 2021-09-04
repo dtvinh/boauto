@@ -1,0 +1,66 @@
+<!-- <div>Transactions work</div>
+<ul>
+  <li *ngFor="let transaction of transactions">
+    <app-transaction [transaction]="transaction"></app-transaction>
+  </li>
+</ul> -->
+
+<div class="card-body px-0 pt-0 pb-2">
+  <div class="table-responsive p-0">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lệnh vào</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Số tiền</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kết quả</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lợi nhuận</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Loại ví</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thời gian</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td class="text-center">
+            <p class="text-xs font-weight-bold mb-0">
+              <!-- <span>{{transaction['betType'] === 'UP' ? 'MUA' : transaction['betType'] === 'DOWN' ? 'BÁN' : ''}}</span> -->
+              <mat-icon aria-hidden="false">{{transaction['betType'] === 'UP' ? 'trending_up' : transaction['betType'] === 'DOWN' ? 'trending_down' : ''}}</mat-icon>
+            </p>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-bold">{{transaction['betAmount'] | currency}}</span>
+          </td>
+          <td class="align-middle text-center text-sm">
+            <span class="badge badge-sm"
+              [ngClass]="{
+                'bg-gradient-success': transaction['result'] === 'WIN',
+                'bg-gradient-danger': transaction['result'] === 'LOSE'
+              }">
+              {{ transaction["result"] }}</span
+            >
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-bold"
+              [ngClass]="{
+                'text-success': transaction['result'] === 'WIN',
+                'text-danger': transaction['result'] === 'LOSE'
+              }">
+              {{(transaction['result'] === 'WIN' ? '+' + transaction['winAmount'] : '-' + transaction['betAmount']) | currency}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="badge badge-sm"
+              [ngClass]="{
+                'bg-gradient-warning': transaction['tradeType'] == null,
+                'bg-gradient-primary': transaction['tradeType'] === 'lorem'
+              }">
+              DEMO</span
+            >
+          </td>
+          <td class="text-center">
+            <p class="text-xs font-weight-bold mb-0">{{transaction['createdDatetime'] | date:'hh:mm:ss'}}</p>
+            <p class="text-xs text-secondary mb-0">{{transaction['createdDatetime'] | date:'dd/MM/YYYY'}}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

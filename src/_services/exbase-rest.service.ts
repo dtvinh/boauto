@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from '.';
-
-const TOKEN_HEADER_KEY = 'Authorization';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,10 +16,12 @@ const httpOptions = {
 export class ExbaseRestService {
   exAccountId = 'r3ZeEHZrxpZBlvy0Y8vu';
 
-  constructor(private http: HttpClient, private  tokenStorageService: TokenStorageService) {}
+  constructor(
+    private http: HttpClient,
+  ) {}
 
-  get(api: string, params: any): Observable<any> {
-    return this.http.get(api, httpOptions)
+  get(api: string, params: HttpParams = new  HttpParams()): Observable<any> {
+    return this.http.get(api, Object.assign({}, httpOptions, { params }));
   }
 
   post(api: string, params: any): Observable<any> {
@@ -33,5 +32,4 @@ export class ExbaseRestService {
   delete() {}
 
   put() {}
-
 }

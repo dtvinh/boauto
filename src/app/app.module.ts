@@ -30,7 +30,8 @@ import {
 
 import {
   TradingAccountInfoComponent,
-  TradingAccountSettingComponent
+  TradingAccountSettingComponent,
+  TransactionsComponent,
 } from './component';
 
 import {
@@ -56,6 +57,7 @@ import {
     TradingAccountSettingComponent,
     TradingAccountInfoComponent,
     ZoomComponent,
+    TransactionsComponent,
   ],
   imports: [
     BrowserModule,

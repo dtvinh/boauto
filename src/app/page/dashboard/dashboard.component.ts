@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   getTraderProfile() {
     this.spinner.show();
 
-    this.exbaseRestService.get('api/auth/me/profile', {})
+    this.exbaseRestService.get('api/auth/me/profile')
       .subscribe((response => {
         console.log(response);
       }),
