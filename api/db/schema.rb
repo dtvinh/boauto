@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 2021_09_05_101221) do
     t.string "klass", null: false
     t.string "username", null: false
     t.string "password_digest", null: false
-    t.string "status"
+    t.integer "status", default: 0, null: false
     t.string "api_token"
     t.integer "ref_id"
+    t.string "ref_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ref_id"], name: "index_users_on_ref_id"
