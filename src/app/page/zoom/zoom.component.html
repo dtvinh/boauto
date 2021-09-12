@@ -14,16 +14,17 @@
       </div>
         <div class="bet-operators">
           <button type="button" class="btn bg-gradient-danger w-35"
-            [disabled]="currentSecond >= 30 ? 'disabled' : ''"
+            [disabled]="false ? 'disabled' : ''"
             (click)="bet('DOWN')">
             <span>Bán</span><mat-icon aria-hidden="false">trending_down</mat-icon>
           </button>
           <p class="w-30 text-center">
-            <span>{{currentSecond >= 30 ? 'Chờ kết quả' : 'Hãy đăt lệnh'}}</span><br>
-            <span class="token bold">{{counting == 0 ? 30 : counting}}s</span>
+            <!-- <span>{{currentSecond >= 30 ? 'Chờ kết quả' : 'Hãy đăt lệnh'}}</span><br>
+            <span class="token bold">{{counting == 0 ? 30 : counting}}s</span> -->
+            <em>Comming soon!</em>
           </p>
           <button type="button" class="btn bg-gradient-success w-35"
-            [disabled]="currentSecond >= 30 ? 'disabled' : ''"
+            [disabled]="false ? 'disabled' : ''"
             (click)="bet('UP')">
             <span>Mua</span><mat-icon aria-hidden="false">trending_up</mat-icon>
           </button>
