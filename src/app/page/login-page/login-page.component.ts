@@ -1,14 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ExbaseRestService } from 'src/_services';
+import { AuthService, TokenStorageService } from 'src/_services';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
 })
 export class LoginPageComponent implements OnInit {
+  sessionForm: any = {
+    username: '',
+    password: '',
+  };
+
+  isLoggedIn = false;
+  isLoginFailed = false;
+
   constructor(
-    private exbaseRestService: ExbaseRestService,
+    private authService: AuthService,
+    private tokenStorageService: TokenStorageService,
+    private router: Router,
     private spinner: NgxSpinnerService
   ) {}
 
@@ -20,16 +31,29 @@ export class LoginPageComponent implements OnInit {
     }, 500);
   }
 
-  formSubmit() {
+  sessionFormSubmit() {
     this.spinner.show();
-    this.exbaseRestService.post('/api/v1/sessions', {}).subscribe(
+    const { username, password } = this.sessionForm;
+    this.authService.createSession(username, password).subscribe(
       (res) => {
-        console.log('res: ', res);
+        if(res.status === 'ok') {
+          this.tokenStorageService.saveToken(res.data.access_token, 'boauto');
+          this.tokenStorageService.saveRefreshToken(
+            res.data.refresh_token,
+            'boauto'
+          );
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.router.navigate(['/dashboard'])
+        } else {
+          this.isLoginFailed = true;
+        }
       },
-      (error) => {},
-      () => {
+      (error) => {
         this.spinner.hide();
-      }
+        this.isLoginFailed = true;
+      },
+      () => this.spinner.hide()
     );
   }
 }

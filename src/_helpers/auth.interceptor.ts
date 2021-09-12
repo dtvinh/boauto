@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authReq = req;
-    const clientType = req.headers.get('client-id') === 'exbase' ? 'exbase' : '';
+    const clientType = this.getClientId(authReq);
     const token = this.tokenStorageService.getToken(clientType);
 
     if (token != null) {
@@ -36,26 +36,43 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
-      const clientType = request.headers.get('client-id') === 'exbase' ? 'exbase' : '';
+      const clientType = this.getClientId(request);
       const token = this.tokenStorageService.getRefreshToken(clientType);
-      console.log('Token expired!');
 
       if (token)
-        return this.authService.refreshTokenTrading(token).pipe(
-          switchMap((response: any) => {
-            this.isRefreshing = false;
-            this.tokenStorageService.saveToken(response.d.access_token, clientType);
-            this.tokenStorageService.saveRefreshToken(response.d.refresh_token, clientType);
-            this.refreshTokenSubject.next(response.d.access_token);
+        if (clientType === 'exbase') {
+          return this.authService.refreshTokenTrading(token).pipe(
+            switchMap((response: any) => {
+              this.isRefreshing = false;
+              this.tokenStorageService.saveToken(response.d.access_token, clientType);
+              this.tokenStorageService.saveRefreshToken(response.d.refresh_token, clientType);
+              this.refreshTokenSubject.next(response.d.access_token);
 
-            return next.handle(this.addTokenHeader(request, response.d.access_token));
-          }),
-          catchError((err) => {
-            this.isRefreshing = false;
-            this.tokenStorageService.signOut();
-            return throwError(err);
-          })
-        );
+              return next.handle(this.addTokenHeader(request, response.d.access_token));
+            }),
+            catchError((err) => {
+              this.isRefreshing = false;
+              this.tokenStorageService.signOut();
+              return throwError(err);
+            })
+          );
+        } else {
+          return this.authService.getRefreshToken(token).pipe(
+            switchMap((response: any) => {
+              this.isRefreshing = false;
+              this.tokenStorageService.saveToken(response.data.access_token, clientType);
+              this.tokenStorageService.saveRefreshToken(response.data.refresh_token, clientType);
+              this.refreshTokenSubject.next(response.data.access_token);
+
+              return next.handle(this.addTokenHeader(request, response.d.access_token));
+            }),
+            catchError((err) => {
+              this.isRefreshing = false;
+              this.tokenStorageService.signOut();
+              return throwError(err);
+            })
+          );
+        }
     }
 
     return this.refreshTokenSubject.pipe(
@@ -67,6 +84,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
     return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
+  }
+
+  private getClientId(request: HttpRequest<any>){
+    return request.headers.get('client-id') === 'exbase' ? 'exbase' : 'boauto';
   }
 }
 

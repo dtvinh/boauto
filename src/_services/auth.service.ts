@@ -27,4 +27,18 @@ export class AuthService {
     );
   }
 
+  createSession(username: string, password: string): Observable<any> {
+    return this.http.post('api/v1/sessions',
+      { username, password },
+      httpOptions
+    );
+  }
+
+  getRefreshToken(refresh_token: string) {
+    return this.http.post('api/v1/tokens',
+      { refresh_token: refresh_token},
+      httpOptions
+    );
+  }
+
 }
